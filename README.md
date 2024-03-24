@@ -2,6 +2,8 @@
 
 an addon to manage scrapping of items, with rules to filter out most common scrappable items for you
 
+**DISCLAIMER:** when you log in to a character, open your character tab (default bind: `C`) to cache your equipment sets. this is used by the `UselessBOP` rule and may cause issues otherwise for legacy/timewalking sets
+
 ## how it works
 
 rules are defined in the `Rules` directory. at present:
