@@ -1,9 +1,9 @@
 ## Interface: 100205
 ## Title: ScrapHead
 ## Notes: Cybernetically enhanced junk selling
-## Author: ellie
+## Author: ellieplayswow
 ## Version: v1.0.0-beta
-## OptionalDeps: TradeSkillMaster
+## OptionalDeps: TradeSkillMaster, AllTheThings
 
 Init.lua
 Api/Cache.lua

@@ -1,6 +1,6 @@
 # ScrapHead
 
-a (better?) addon to manage scrapping of items, with advanced rules to filter out most common scrappable items for you
+an addon to manage scrapping of items, with rules to filter out most common scrappable items for you
 
 ## how it works
 
