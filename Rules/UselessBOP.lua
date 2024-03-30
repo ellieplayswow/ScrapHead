@@ -16,7 +16,7 @@ ns.Api:AddRule(
 
             local levelDiff = abs(itemStack.itemData.minLevel - playerLevel)
             if levelDiff >= 10 then
-                if not ns.EquipmentSet.Cache:Has(itemStack.itemString) then
+                if ns.EquipmentSet.TimerStarted and not ns.EquipmentSet.Cache:Has(itemStack.itemString) then
                     return { action = "sell" }
                 end
             end

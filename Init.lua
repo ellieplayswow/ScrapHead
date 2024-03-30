@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global, undefined-field
 local _, ns = ...
 
 local Api = {}
@@ -42,3 +43,8 @@ end
 ns.Cache = {}
 ns.Api = Api
 ns.Class = {}
+
+ns.Theme = {
+    Highlight = "#FBBF24",
+    Reset = "<r>"
+}

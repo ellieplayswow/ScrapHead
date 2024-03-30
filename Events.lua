@@ -1,9 +1,17 @@
-local _, ns = ...
+local addonName, ns = ...
 
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("MERCHANT_SHOW")
 frame:RegisterEvent("EQUIPMENT_SETS_CHANGED")
+frame:RegisterEvent("ADDON_LOADED")
 frame:SetScript("OnEvent", function(self, event, ...)
+    if event == "ADDON_LOADED" then
+        local addonLoaded = ...
+        if addonLoaded == addonName then
+            ns.EquipmentSet:Init()
+        end
+    end
+    
     if event == "EQUIPMENT_SETS_CHANGED" then
         ns.EquipmentSet:Refresh()
     end
@@ -12,7 +20,7 @@ frame:SetScript("OnEvent", function(self, event, ...)
             ns.EquipmentSet:Refresh()
         end
 
-        for bag = 0, 4 do
+        for bag = 0, 5 do
             for slot = 1, C_Container.GetContainerNumSlots(bag) do
                 local itemInfo = C_Container.GetContainerItemInfo(bag, slot)
                 if itemInfo ~= nil then
