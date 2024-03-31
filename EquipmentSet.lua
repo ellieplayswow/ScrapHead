@@ -25,6 +25,7 @@ function EquipmentSet:Refresh()
 
     local setIds = C_EquipmentSet.GetEquipmentSetIDs()
     for _, setId in ipairs(setIds) do
+        local setName = C_EquipmentSet.GetEquipmentSetInfo(setId)
         local locations = C_EquipmentSet.GetItemLocations(setId)
         for _, location in ipairs(locations) do
             if location ~= 0 and location ~= 1 and location ~= -1 then
@@ -34,7 +35,9 @@ function EquipmentSet:Refresh()
                     local itemInfo = C_Container.GetContainerItemInfo(bag, slot)
                     if itemInfo ~= nil then
                         local itemString = string.match(itemInfo.hyperlink, "item[%-?%d:]+")
+                        --ns.out:Write(itemInfo.hyperlink, ": ", bag, ":", slot, " in set ", setName, " #", itemString)
                         if not self.Cache:Has(itemString) then
+                            --ns.out:Write("not in cache")
                             self.Cache:Set(itemString, setId)
                         end
                     end

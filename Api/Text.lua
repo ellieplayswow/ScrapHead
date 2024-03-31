@@ -16,10 +16,10 @@ function Text:Write(...)
     local line = ""
 
     for _, v in ipairs({ ... }) do
-        local part = v
-        if v:sub(1, 1) == "#" then
-            part = "\124cFF" .. v:sub(2)
-        elseif v == "<r>" then
+        local part = tostring(v)
+        if part:sub(1, 1) == "#" then
+            part = "\124cFF" .. part:sub(2)
+        elseif part == "<r>" then
             part = "\124r"
         end
 

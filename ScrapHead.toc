@@ -15,5 +15,6 @@ Rules/IsJunk.lua
 Rules/BelowAuctionPrice.lua
 Rules/UselessBOP.lua
 Rules/CollectedAllThings.lua
+Rules/ArtifactRelics.lua
 
 Events.lua

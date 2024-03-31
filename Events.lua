@@ -11,35 +11,55 @@ frame:SetScript("OnEvent", function(self, event, ...)
             ns.EquipmentSet:Init()
         end
     end
-    
+
     if event == "EQUIPMENT_SETS_CHANGED" then
         ns.EquipmentSet:Refresh()
     end
     if event == "MERCHANT_SHOW" then
-        if not ns.EquipmentSet.Initialised then
+        --if not ns.EquipmentSet.Initialised then
             ns.EquipmentSet:Refresh()
-        end
+        --end
+
+        local sellData = {}
+        local totalPrice = 0
 
         for bag = 0, 5 do
             for slot = 1, C_Container.GetContainerNumSlots(bag) do
                 local itemInfo = C_Container.GetContainerItemInfo(bag, slot)
                 if itemInfo ~= nil then
                     local itemString = string.match(itemInfo.hyperlink, "item[%-?%d:]+")
-                    local itemStack = ns.Class.ItemStack:New(itemString, itemInfo.stackCount)
+                    if itemString ~= nil then
+                        local itemStack = ns.Class.ItemStack:New(itemString, itemInfo.stackCount)
 
-                    for _, rule in ipairs(ns.Api.Rules) do
-                        local result = rule.func(itemStack)
-                        if result ~= false then
-                            if itemStack.itemData.sellPrice > 0 then
-                                C_Container.UseContainerItem(bag, slot)
-                            else
-                                print(bag .. ":" .. slot .. ", " .. itemStack.itemData.name .. " rule " .. rule.name)
+                        for _, rule in ipairs(ns.Api.Rules) do
+                            local result = rule.func(itemStack)
+                            if result ~= false then
+                                ns.out:Write("Item ", itemInfo.hyperlink, " (" .. bag .. ":" .. slot .. ") matches rule ", ns.Theme.Highlight, rule.name, ns.Theme.Reset, "!")
+                                if itemStack.itemData.sellPrice > 0 then
+                                    sellData[rule.name] = (sellData[rule.name] or 0) + (itemStack.itemData.sellPrice * itemStack.quantity)
+                                    C_Container.UseContainerItem(bag, slot)
+                                    totalPrice = totalPrice + (itemStack.itemData.sellPrice * itemStack.quantity)
+                                else
+                                    print(bag .. ":" .. slot .. ", " .. itemStack.itemData.name .. " rule " .. rule.name)
+                                end
+                                break
                             end
-                            break
                         end
+                    else
+                        print(bag .. ":" .. slot .. " seems invalid")
                     end
                 end
             end
         end
+
+        ns.out:Write("Vendor report: ", ns.Theme.Highlight, C_CurrencyInfo.GetCoinTextureString(totalPrice))
+        for name, price in pairs(sellData) do
+            ns.out:Write(ns.Theme.Highlight, name, ns.Theme.Reset, ": ", ns.Theme.Highlight, C_CurrencyInfo.GetCoinTextureString(price))
+        end
     end
 end)
+
+_ScrapHead = ns
+function _ScrapHeadItem(link)
+    return string.match(link, "item[%-?%d:]+")
+end
