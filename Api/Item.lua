@@ -3,7 +3,7 @@ local _, ns = ...
 local ItemStack = {}
 ItemStack.__index = ItemStack
 
-function ItemStack:New(itemString, quantity)
+function ItemStack:New(itemString, quantity, isBound)
     local localItem = {}
     setmetatable(localItem, ItemStack)
     self.__index = self
@@ -11,6 +11,7 @@ function ItemStack:New(itemString, quantity)
     self.itemId = tonumber(itemString:match("item:(%d+)"))
     self.quantity = quantity
     self.itemString = itemString
+    self.isSoulbound = isBound
 
     -- get transmog data
     if self.quantity == 1 then

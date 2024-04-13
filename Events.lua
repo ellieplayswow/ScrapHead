@@ -29,7 +29,7 @@ frame:SetScript("OnEvent", function(self, event, ...)
                 if itemInfo ~= nil then
                     local itemString = string.match(itemInfo.hyperlink, "item[%-?%d:]+")
                     if itemString ~= nil then
-                        local itemStack = ns.Class.ItemStack:New(itemString, itemInfo.stackCount)
+                        local itemStack = ns.Class.ItemStack:New(itemString, itemInfo.stackCount, itemInfo.isBound)
 
                         for _, rule in ipairs(ns.Api.Rules) do
                             local result = rule.func(itemStack)

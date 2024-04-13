@@ -31,7 +31,7 @@ function Api:GetThingsCount(itemRef)
     if _G and _G.AllTheThings then
         local ATT = _G.AllTheThings
         --local result = _G.AllTheThings.GetCachedSearchResults(_G.AllTheThings.SearchForField, "itemID", itemRef.itemId)
-        local result = ATT.GetCachedSearchResults(ATT.SearchForLink, itemRef.itemLink)
+        local result = ATT.GetCachedSearchResults(ATT.SearchForLink, itemRef.itemString)
         if result ~= nil then
             total = result.total or 0
             progress = result.progress or 0
