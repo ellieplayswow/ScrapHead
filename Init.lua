@@ -19,6 +19,11 @@ function Api:GetItemValue(itemRef)
         if error ~= nil then return 0 end
         if price == nil then return 0 end
         return price
+    elseif Auctionator then
+        local price = Auctionator.API.v1.GetAuctionPriceByItemID("ScrapHead", itemRef.itemId)
+        if price == nil then return 0 end
+
+        return price
     end
 
     return 0
