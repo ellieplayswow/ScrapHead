@@ -14,7 +14,11 @@ function Api:AddRule(ruleName, ruleFunction)
 end
 
 function Api:GetItemValue(itemRef)
-    if TSM_API then
+    if OpenTradeSkill and OpenTradeSkill.Pricing then
+        local price = OpenTradeSkill.Pricing:Lookup(itemRef.itemId)
+        if price == -1 then return 0 end
+        return price
+    elseif TSM_API then
         local price, error = TSM_API.GetCustomPriceValue("DBMinBuyout", "i:" .. tostring(itemRef.itemId))
         if error ~= nil then return 0 end
         if price == nil then return 0 end

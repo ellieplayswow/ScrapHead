@@ -3,7 +3,7 @@
 ## Notes: Cybernetically enhanced junk selling
 ## Author: ellieplayswow
 ## Version: v1.0.0-beta2
-## OptionalDeps: TradeSkillMaster, AllTheThings, Auctionator
+## OptionalDeps: TradeSkillMaster, AllTheThings, Auctionator, OpenTradeSkill_Pricing
 
 Init.lua
 Api/Cache.lua
@@ -16,5 +16,6 @@ Rules/BelowAuctionPrice.lua
 Rules/UselessBOP.lua
 Rules/CollectedAllThings.lua
 Rules/ArtifactRelics.lua
+Rules/JunkConsumables.lua
 
 Events.lua
